@@ -1,8 +1,7 @@
 from dataclasses import dataclass
-from typing import Any
 
 
-class Registry:
+class Registry[T]:
     """
     An example of the registry pattern as a Python class.
 
@@ -15,14 +14,14 @@ class Registry:
     lowercase.
     """
 
-    def __init__(self, **items: Any):
+    def __init__(self, **items: T):
         self._registry = {}
         self.put(**items)
 
-    def get(self, key: str) -> Any:
+    def get(self, key: str) -> T:
         return self._registry.get(key.lower())
 
-    def put(self, **items: Any):
+    def put(self, **items: T):
         for name, obj in items.items():
             if self._registry.get(name, None) is not None:
                 raise ValueError(f"The key {name} already exists in the registy")

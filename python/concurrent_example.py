@@ -5,8 +5,10 @@ from random import random
 from time import sleep
 from typing import Any
 
+type number = float | int
 
-def do_task(t: float | int) -> float | int:
+
+def do_task(t: number) -> number:
     print(f"Starting sleep for {t:.2f}s")
     sleep(t)
     print(f"Done sleeping for {t:.2f}s")
@@ -22,7 +24,7 @@ class Result:
     err: Exception | None = None
 
 
-def do_task_result(t: float | int) -> Result:
+def do_task_result(t: number) -> Result:
     try:
         print(f"Starting sleep for {t:.2f}s")
         sleep(t)
