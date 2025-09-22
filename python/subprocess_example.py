@@ -1,4 +1,4 @@
-from subprocess import PIPE, CalledProcessError, CompletedProcess, run
+from subprocess import CalledProcessError, CompletedProcess, run
 
 
 def execute_command(command: str) -> CompletedProcess:
@@ -9,9 +9,8 @@ def execute_command(command: str) -> CompletedProcess:
         return run(
             command,
             shell=True,  # Use the default system shell (bash, zsh, e.t.c)
-            stdout=PIPE,  # Captures stdout and makes it available
-            stderr=PIPE,  # Same as above but for stderr
-            text=True,  # Auto decodes piped bytes into text
+            capture_output=True,  # Capture stdout and stderr
+            text=True,  # Decode output bytes into strings
             check=True,  # Raises an error on non-zero return code
         )
 
