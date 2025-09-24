@@ -1,8 +1,9 @@
 import hashlib
 import math
 from hashlib import sha1
-from random import choice
+from random import choice, randint
 from string import ascii_letters
+from sys import getsizeof
 from typing import TYPE_CHECKING, Callable
 
 from bitarray import bitarray, util
@@ -20,7 +21,7 @@ class HyperLogLog:
     def __init__(
         self,
         hashing_algo: Callable[["ReadableBuffer"], HASH] = sha1,
-        register_bits: int = 4,
+        register_bits: int = 14,
     ):
         """Initialize the HyperLogLog data structure.
 
@@ -140,5 +141,24 @@ def test() -> None:
         print(f"Real Unique: {len(set(data))}\n")
 
 
+def sized():
+    def new_ip() -> str:
+        return (
+            f"{randint(0, 255)}.{randint(0, 255)}.{randint(0, 255)}.{randint(0, 255)}"
+        )
+
+    data = [new_ip() for _ in range(1_000_000)]
+    print("For 1 million IP addresses:")
+    print(f"Size of set: {getsizeof(set(data)):3,} bytes")
+
+    hll = HyperLogLog()
+
+    for d in data:
+        hll.ingest(d)
+
+    print(f"Size of HLL: {getsizeof(hll):3,} bytes")
+
+
 if __name__ == "__main__":
     test()
+    sized()
