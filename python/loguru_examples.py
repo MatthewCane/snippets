@@ -4,7 +4,7 @@ from pathlib import Path
 from loguru import logger as log
 
 """
-https://www.dash0.com/guides/python-logging-with-loguru#redirecting-standard-logging-into-loguru
+https://www.dash0.com/guides/python-logging-with-loguru
 """
 
 
