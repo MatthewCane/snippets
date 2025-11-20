@@ -1,6 +1,7 @@
 .ruff_cache
+.mypy_cache
 .venv
-
+__pycache__
 **/*.b64
 **/*.json
 **/*.pickle
